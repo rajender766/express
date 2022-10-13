@@ -2,30 +2,32 @@ const express = require("express");
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 const path = require("path");
-const date = require("date-fns");
 
-const dbPath = path.join(__dirname, "todoApplication.db");
+const databasePath = path.join(__dirname, "todoApplication.db");
 
 const app = express();
+
 app.use(express.json());
 
 let database = null;
-const initializerDBAndSever = async () => {
+
+const initializeDbAndServer = async () => {
   try {
     database = await open({
-      filename: dbPath,
+      filename: databasePath,
       driver: sqlite3.Database,
     });
-    app.listen(3000, () => {
-      console.log(`Server Running at http://localhost:3000/`);
-    });
+
+    app.listen(3000, () =>
+      console.log("Server Running at http://localhost:3000/")
+    );
   } catch (error) {
     console.log(`DB Error: ${error.message}`);
     process.exit(1);
   }
 };
 
-initializerDBAndSever();
+initializeDbAndServer();
 
 const convertDBResponseTOdOTOObject = (dbObject) => {
   return {
@@ -41,24 +43,27 @@ const convertDBResponseTOdOTOObject = (dbObject) => {
 //API 1
 
 // SN 1
-app.get("/todos/", async (request, response) => {
-  const { status, priority, search_q = "", category } = request.query;
-  console.log(status)
-  const getTodoQuery = `
+app.get("/todos/?status=TO%20DO", async (request, response) => {
+    const {status} = request.query
+  const getStatesQuery = `
     SELECT
       *
-    FROM 
-      todo
-    WHERE 
-    status = '${status}';`;
-  const todoArray = await database.all(getTodoQuery);
-  console.log(todoArray)
+    FROM
+      todos
+    WHERE
+    status = ${status};`;
+  const statesArray = await database.all(getStatesQuery);
   response.send(
-    todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
+    statesArray.map((eachState) =>
+      const convertDBResponseTOdOTOObject = (dbObject) => {
+(eachState)
+    )
   );
 });
+
+
 // SN 2
-app.get("/todos/", async (request, response) => {
+app.get("/todos/?priority=HIGH", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -72,8 +77,9 @@ app.get("/todos/", async (request, response) => {
     todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
   );
 });
+
 // SN 3
-app.get("/todos/", async (request, response) => {
+app.get("/todos/?priority=HIGH&status=IN%20PROGRESS", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -87,8 +93,9 @@ app.get("/todos/", async (request, response) => {
     todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
   );
 });
+
 // SN 4
-app.get("/todos/", async (request, response) => {
+app.get("/todos/?search_q=Buy", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -102,8 +109,9 @@ app.get("/todos/", async (request, response) => {
     todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
   );
 });
+
 // SN 5
-app.get("/todos/", async (request, response) => {
+app.get('/todos/?category=WORK&status=DONE', async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -119,7 +127,7 @@ app.get("/todos/", async (request, response) => {
 });
 
 // SN 6
-app.get("/todos/", async (request, response) => {
+app.get("/todos/?category=HOME", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -135,7 +143,7 @@ app.get("/todos/", async (request, response) => {
 });
 
 // SN 7
-app.get("/todos/", async (request, response) => {
+app.get("/todos/?category=LEARNING&priority=HIGH", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
