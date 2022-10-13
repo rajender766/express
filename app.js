@@ -3,6 +3,8 @@ const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 const path = require("path");
 
+import format from 'date-fns'
+
 const databasePath = path.join(__dirname, "todoApplication.db");
 
 const app = express();
@@ -43,28 +45,28 @@ const convertDBResponseTOdOTOObject = (dbObject) => {
 //API 1
 
 // SN 1
-app.get("/todos/?status=TO%20DO", async (request, response) => {
-    const {status} = request.query
-  const getStatesQuery = `
+app.get("/todos/", async (request, response) => {
+  const { status, priority, search_q = "", category } = request.query;
+ 
+  const getTodoQuery = `
     SELECT
       *
-    FROM
-      todos
-    WHERE
-    status = ${status};`;
-  const statesArray = await database.all(getStatesQuery);
+    FROM 
+      todo
+    WHERE 
+    status = '${status}';`;
+  const todoArray = await database.all(getTodoQuery);
+ 
   response.send(
-    statesArray.map((eachState) =>
-      const convertDBResponseTOdOTOObject = (dbObject) => {
-(eachState)
-    )
+    todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
   );
 });
 
 
 // SN 2
-app.get("/todos/?priority=HIGH", async (request, response) => {
+app.get("/todos/", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
+
   const getTodoQueryPriority = `
     SELECT
       *
@@ -73,13 +75,14 @@ app.get("/todos/?priority=HIGH", async (request, response) => {
     WHERE 
     priority = '${priority}';`;
   const todoArray = await database.all(getTodoQueryPriority);
+
   response.send(
     todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
   );
 });
 
 // SN 3
-app.get("/todos/?priority=HIGH&status=IN%20PROGRESS", async (request, response) => {
+app.get("/todos/", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -87,7 +90,7 @@ app.get("/todos/?priority=HIGH&status=IN%20PROGRESS", async (request, response) 
     FROM 
       todo
     WHERE 
-    priority = '${priority}' && status = '${status}' ;`;
+    priority = '${priority}' && status = '${status}';`;
   const todoArray = await database.all(getTodoQueryPriority);
   response.send(
     todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
@@ -95,7 +98,7 @@ app.get("/todos/?priority=HIGH&status=IN%20PROGRESS", async (request, response) 
 });
 
 // SN 4
-app.get("/todos/?search_q=Buy", async (request, response) => {
+app.get("/todos/", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -111,7 +114,7 @@ app.get("/todos/?search_q=Buy", async (request, response) => {
 });
 
 // SN 5
-app.get('/todos/?category=WORK&status=DONE', async (request, response) => {
+app.get('/todos/', async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -127,7 +130,7 @@ app.get('/todos/?category=WORK&status=DONE', async (request, response) => {
 });
 
 // SN 6
-app.get("/todos/?category=HOME", async (request, response) => {
+app.get("/todos/", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -143,7 +146,7 @@ app.get("/todos/?category=HOME", async (request, response) => {
 });
 
 // SN 7
-app.get("/todos/?category=LEARNING&priority=HIGH", async (request, response) => {
+app.get("/todos/", async (request, response) => {
   const { status, priority, search_q = "", category } = request.query;
   const getTodoQueryPriority = `
     SELECT
@@ -157,6 +160,7 @@ app.get("/todos/?category=LEARNING&priority=HIGH", async (request, response) => 
     todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
   );
 });
+
 
 //API 2
 
@@ -180,13 +184,14 @@ app.get("/todos/:todoId/", async (request, response) => {
 app.get("/agenda/", async (request, response) => {
   const { todoId } = request.params;
   const date = "2021-12-12";
+  const newDate = format(date)
   const getTodoQueryPriority = `
     SELECT
       *
     FROM 
       todo
     WHERE  
-       dueDate = ${date};`;
+       dueDate = ${newDate};`;
   const todoArray = await database.all(getTodoQueryPriority);
   response.send(
     todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
