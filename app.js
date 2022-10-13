@@ -274,11 +274,12 @@ app.put("/todos/:todoId/", async (request, response) => {
 app.put("/todos/:todoId/", async (request, response) => {
   const { todoId } = request.params;
   const { dueDate } = request.body;
+  const date = format(dueDate)
   const updateTodoQuery = `
     UPDATE
       todo
     SET
-      dueDate ='${dueDate}'
+      dueDate ='${date}'
     WHERE
       id = ${todoId};`;
   await database.run(updateTodoQuery);
