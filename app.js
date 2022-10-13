@@ -49,7 +49,7 @@ app.get("/todos/?status=TO%20DO", async (request, response) => {
     SELECT
       *
     FROM
-      todos
+      todo
     WHERE
     status = ${status};`;
   const statesArray = await database.all(getStatesQuery);
