@@ -3,7 +3,6 @@ const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
 const path = require("path");
 
-import format from 'date-fns'
 
 const databasePath = path.join(__dirname, "todoApplication.db");
 
@@ -184,14 +183,14 @@ app.get("/todos/:todoId/", async (request, response) => {
 app.get("/agenda/", async (request, response) => {
   const { todoId } = request.params;
   const date = "2021-12-12";
-  const newDate = format(date)
+
   const getTodoQueryPriority = `
     SELECT
       *
     FROM 
       todo
     WHERE  
-       dueDate = ${newDate};`;
+       dueDate = ${date};`;
   const todoArray = await database.all(getTodoQueryPriority);
   response.send(
     todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
@@ -274,12 +273,12 @@ app.put("/todos/:todoId/", async (request, response) => {
 app.put("/todos/:todoId/", async (request, response) => {
   const { todoId } = request.params;
   const { dueDate } = request.body;
-  const date = format(dueDate)
+  
   const updateTodoQuery = `
     UPDATE
       todo
     SET
-      dueDate ='${date}'
+      dueDate ='${dueDate}'
     WHERE
       id = ${todoId};`;
   await database.run(updateTodoQuery);

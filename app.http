@@ -28,13 +28,20 @@ GET http://localhost:3000/agenda/
 ### api-4
 POST http://localhost:3000/todos/
 
-### api-5
-PUT http://localhost:3000/todos/:todoId/
-
 ### api-5 sn-1
 PUT http://localhost:3000/todos/:todoId/
 
+### api-5 sn-2
+PUT http://localhost:3000/todos/:todoId/
 
+### api-5 sn-3
+PUT http://localhost:3000/todos/:todoId/
+
+### api-5 sn-4
+PUT http://localhost:3000/todos/:todoId/
+
+### api-5 sn-5
+PUT http://localhost:3000/todos/:todoId/
 
 
 ### api-6
