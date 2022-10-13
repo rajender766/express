@@ -1,0 +1,49 @@
+GET http://localhost:3000/todos/?status=TO%20DO
+
+###
+GET http://localhost:3000/todos/?priority=HIGH
+
+###
+GET http://localhost:3000/todos/?priority=HIGH&status=IN%20PROGRESS
+
+###
+GET http://localhost:3000/todos/?search_q=Buy
+
+###
+GET http://localhost:3000/todos/?category=WORK&status=DONE
+
+###
+GET http://localhost:3000/todos/?category=HOME
+
+###
+GET http://localhost:3000/todos/?category=LEARNING&priority=HIGH
+
+### api-2
+GET http://localhost:3000/todos/:todoId/
+
+### api-3
+GET http://localhost:3000/agenda/
+
+
+### api-4
+POST http://localhost:3000/todos/
+
+### api-5 sn-1
+PUT http://localhost:3000/todos/:todoId/
+
+### api-5 sn-2
+PUT http://localhost:3000/todos/:todoId/
+
+### api-5 sn-3
+PUT http://localhost:3000/todos/:todoId/
+
+### api-5 sn-4
+PUT http://localhost:3000/todos/:todoId/
+
+### api-5 sn-5
+PUT http://localhost:3000/todos/:todoId/
+
+
+### api-6
+DELETE http://localhost:3000/todos/:todoId/
+
