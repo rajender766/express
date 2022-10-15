@@ -49,6 +49,7 @@ app.get("/todos/", async (request, response) => {
   const getTodoQuery = `
     SELECT
       *
+<<<<<<< HEAD
     FROM 
       todo
     WHERE 
@@ -58,6 +59,13 @@ app.get("/todos/", async (request, response) => {
     response.status(400);
     response.send("Invalid Todo Status");
   }
+=======
+    FROM
+      todo
+    WHERE
+    status = ${status};`;
+  const statesArray = await database.all(getStatesQuery);
+>>>>>>> 9c97913f7d42d5048290f67963b2faf09235532d
   response.send(
     todoArray.map((eachTodo) => convertDBResponseTOdOTOObject(eachTodo))
   );

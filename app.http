@@ -1,29 +1,28 @@
-## SN 1
 GET http://localhost:3000/todos/?status=TO%20DO
 
-### SN 2
+###
 GET http://localhost:3000/todos/?priority=HIGH
 
-### SN 3
+###
 GET http://localhost:3000/todos/?priority=HIGH&status=IN%20PROGRESS
 
-### SN 4
+###
 GET http://localhost:3000/todos/?search_q=Buy
 
-### SN 5
+###
 GET http://localhost:3000/todos/?category=WORK&status=DONE
 
-### SN 6
+###
 GET http://localhost:3000/todos/?category=HOME
 
-### SN 7
+###
 GET http://localhost:3000/todos/?category=LEARNING&priority=HIGH
 
 ### api-2
 GET http://localhost:3000/todos/:todoId/
 
 ### api-3
-GET http://localhost:3000/agenda/?date=2021-12-12
+GET http://localhost:3000/agenda/
 
 
 ### api-4
@@ -47,7 +46,4 @@ PUT http://localhost:3000/todos/:todoId/
 
 ### api-6
 DELETE http://localhost:3000/todos/:todoId/
-
-
-
 
