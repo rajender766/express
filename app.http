@@ -29,21 +29,47 @@ GET http://localhost:3000/agenda/
 POST http://localhost:3000/todos/
 
 ### api-5 sn-1
-PUT http://localhost:3000/todos/:todoId/
+PUT http://localhost:3000/todos/2/
+Content-Type: application/json
+
+ {
+      "status": "DONE"
+    }
 
 ### api-5 sn-2
-PUT http://localhost:3000/todos/:todoId/
+PUT http://localhost:3000/todos/3/
+Content-Type: application/json
+
+ {
+      "priority": "HIGH"
+    }
 
 ### api-5 sn-3
 PUT http://localhost:3000/todos/:todoId/
+Content-Type: application/json
+
+ {
+      "todo": "Clean the garden"
+    }
 
 ### api-5 sn-4
 PUT http://localhost:3000/todos/:todoId/
+Content-Type: application/json
+
+ {
+      "category": "LEARNING"
+    }
 
 ### api-5 sn-5
 PUT http://localhost:3000/todos/:todoId/
+Content-Type: application/json
+
+ {
+      "dueDate": "2021-01-12"
+    }
 
 
 ### api-6
 DELETE http://localhost:3000/todos/:todoId/
+
 
