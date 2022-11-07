@@ -1,35 +1,46 @@
+### API 1 Sn 1
 GET http://localhost:3000/todos/?status=TO%20DO
 
-###
+###  Sn 2
 GET http://localhost:3000/todos/?priority=HIGH
 
-###
+###  Sn 3
 GET http://localhost:3000/todos/?priority=HIGH&status=IN%20PROGRESS
 
-###
+###  Sn 4
 GET http://localhost:3000/todos/?search_q=Buy
 
-###
+###  Sn 5
 GET http://localhost:3000/todos/?category=WORK&status=DONE
 
-###
+###  Sn 6
 GET http://localhost:3000/todos/?category=HOME
 
-###
+###  Sn 7
 GET http://localhost:3000/todos/?category=LEARNING&priority=HIGH
 
 ### api-2
 GET http://localhost:3000/todos/:todoId/
 
 ### api-3
-GET http://localhost:3000/agenda/
+GET http://localhost:3000/agenda/?date=2021-12-12
 
 
 ### api-4
 POST http://localhost:3000/todos/
+Content-Type: application/json
+
+ {
+ "id": 6,
+ "todo": "Finalize event theme",
+ "priority": "LOW",
+ "status": "TO DO",
+ "category": "HOME",
+ "dueDate": "2021-02-22"
+}
 
 ### api-5 sn-1
-PUT http://localhost:3000/todos/2/
+PUT http://localhost:3000/todos/3/
 Content-Type: application/json
 
  {
@@ -45,7 +56,7 @@ Content-Type: application/json
     }
 
 ### api-5 sn-3
-PUT http://localhost:3000/todos/:todoId/
+PUT http://localhost:3000/todos/3/
 Content-Type: application/json
 
  {
@@ -53,7 +64,7 @@ Content-Type: application/json
     }
 
 ### api-5 sn-4
-PUT http://localhost:3000/todos/:todoId/
+PUT http://localhost:3000/todos/3/
 Content-Type: application/json
 
  {
@@ -61,15 +72,15 @@ Content-Type: application/json
     }
 
 ### api-5 sn-5
-PUT http://localhost:3000/todos/:todoId/
+PUT http://localhost:3000/todos/3/
 Content-Type: application/json
 
  {
-      "dueDate": "2021-01-12"
+      "dueDate": "2021-10-12"
     }
 
 
 ### api-6
-DELETE http://localhost:3000/todos/:todoId/
+DELETE http://localhost:3000/todos/6/
 
 
